@@ -1,18 +1,75 @@
+import java.time.LocalDate;
+
 public class Main {
+
+    public static boolean leapYear(int year){
+        if ((year >= 1584) && (((year%4==0) && (year%100!=0)) || (year % 400 == 0))){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static String verifyOS(int OS, int year) {
+
+        if (OS == 0 && year < 2015) {
+            return  "Установите облегченную версию приложения для iOS по ссылке";
+        }
+        if (OS == 0 && year >= 2015){
+            return "Установите версию приложения для iOS по ссылке";
+        }
+        if (OS == 1 && year < 2015){
+            return "Установите облегченную версию приложения для Android по ссылке";
+        }
+        if (OS == 1 && year >= 2015){
+           return "Установите версию приложения для Android по ссылке";
+        }
+        return "";
+    }
+
+    public static int delivery(int distance){
+        if (distance <= 20){
+            return 1;
+        } else if (distance <= 60){
+            return 2;
+        } else if (distance <= 100){
+            return 3;
+        } else
+            return -1;
+    }
+
     public static void main(String[] args) {
 
         System.out.println("Задача №1");
-        String firstName = "Ivan";
-        String middleName = "Ivanovich";
-        String lastName = "Ivanov";
-        String fullName = lastName + " " + firstName + " " + middleName;
-        System.out.println("Ф. И. О. сотрудника - " + fullName);
+        int year = 2021;
+        if (leapYear(year)) {
+            System.out.println(year + " год - високостный год");
+        } else {
+            System.out.println(year + " год - невисокостный год");
+        }
 
         System.out.println("Задача №2");
-        System.out.println("Данные Ф. И. О. сотрудника для заполнения отчета - " + fullName.toUpperCase());
+        int currentYear = LocalDate.now().getYear();
+        int clientOS = 0;
+        System.out.println(verifyOS(clientOS, currentYear));
 
         System.out.println("Задача №3");
-        fullName = "Иванов Семён Семёнович";
-        System.out.println("Данные Ф. И. О. сотрудника - " + fullName.replace('ё', 'е'));
+        int deliveryDistance = 95;
+        switch (delivery(deliveryDistance)){
+            case 1:
+                System.out.println("Потребуется дней: 1");
+                break;
+            case 2:
+                System.out.println("Потребуется дней: 2");
+                break;
+            case 3:
+                System.out.println("Потребуется дней: 3");
+                break;
+            default:
+                System.out.println("В ваш регион нет доставки");
+                break;
+        }
+
+
     }
 }
